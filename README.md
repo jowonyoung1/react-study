@@ -150,7 +150,10 @@ window.addEventListener("load", function () {
 - 기본 css 와 js 파일은 CDN 으로 참조한다.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 ```
 
@@ -250,10 +253,30 @@ window.addEventListener("load", function () {
 
 ```json
 [
-  { "id": 1, "pic": "b1.png", "url": "#", "title": "AI 헬스케어의 <br/> 마일스톤을 찍다" },
-  { "id": 2, "pic": "b2.png", "url": "#", "title": "카카오브레인의 <br/> 연구문화" },
-  { "id": 3, "pic": "b3.png", "url": "#", "title": "PathFinder 2기의 <br/> 언어모델 활용기" },
-  { "id": 4, "pic": "b4.png", "url": "#", "title": "칼로리의 꿈 <br/> 시리즈 ③" }
+  {
+    "id": 1,
+    "pic": "b1.png",
+    "url": "#",
+    "title": "AI 헬스케어의 <br/> 마일스톤을 찍다"
+  },
+  {
+    "id": 2,
+    "pic": "b2.png",
+    "url": "#",
+    "title": "카카오브레인의 <br/> 연구문화"
+  },
+  {
+    "id": 3,
+    "pic": "b3.png",
+    "url": "#",
+    "title": "PathFinder 2기의 <br/> 언어모델 활용기"
+  },
+  {
+    "id": 4,
+    "pic": "b4.png",
+    "url": "#",
+    "title": "칼로리의 꿈 <br/> 시리즈 ③"
+  }
 ]
 ```
 
@@ -1188,3 +1211,4 @@ const result = "안녕" ?? "없군요"    결과값은 "안녕"
 
 - 반드시 저작권을 밝혀야 한다.
 - 첫 화면만 연습하면 됩니다. (첫 화면이 가장 난이도가 높다.)
+- 리액트 작업
