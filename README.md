@@ -109,27 +109,28 @@ const 사용하실 때 오해의 소지가 있는 경우
 
 - nvm (Node Version Manger) 설치 및 활용
   : https://github.com/coreybutler/nvm-windows/releases
-  : 설치 버전 확인 `nvm ls-remote`
+  : 설치 버전 확인 `nvm -v`
   : 설치 가능한 버전 목록 `nvm list available`
   : 설치 하기 `nvm install 버전`
   : 현재 사용중인 Node 버전 확인하기 `node -v`
   : 현재 설치된 Node 목록 확인 `nvm ls`
-  : 사용할 Node 버전 선택하기 `nvm use 18.17.1`
-  : Node 설치된 경로 알아보기 `which node`
+  : 사용할 Node 버전 선택하기 `nvm use 버전`
+  : Node 설치된 경로 알아보괴 `which node`
 
 - npm 보다는 yarn 선호
-  : Node Package Manager(node_modules)
-  : package.json 의 dependency 목록을 참조
+  : Node Package Manager (node_modules)
+  : package.json 의 dependencies 목록을 참조
   : npm 이 가끔 다운로드 중 오류가 발생하고, 소스가 깨짐 현상
-  : 예) 네이버 Toast UI 등
+  : 예) 네이버 Toast UI 등.
   : npm 보다 안정적인 package 관리를 위해서 yarn 을 활용.
   : `npm install -g yarn`
   : `yarn --version`
 
 - favicon 만들기(디자이너 담당)
   : https://realfavicongenerator.net/
+
 - ::before, ::after 샘플
-  : css 로 내용 만들기
+  : css 로 내용만들기
 
 ```html
 <body>
@@ -170,4 +171,113 @@ const 사용하실 때 오해의 소지가 있는 경우
     </div>
   </div>
 </body>
+```
+
+# JS 16 장
+
+```txt
+ 16장. Property Attribute ( get, set, 불변객체(freeze))
+
+ [[단어]]
+
+ const Obj = {}
+ Obj.[[Prototype]] 이렇게 정의는 되어도
+                  우리는 사용할 수 없어요.
+ Obj.__proto__   이렇게 접근이 가능하도록 개방됨.
+
+
+ const Person = {
+   age: 10
+ }
+ Pesong.nickName = "홍길동";
+
+ console.log(Person.age); // 개발자가 활용
+ console.log(Person.nickName); // 개발자가 활용
+
+ Person.age //  [[value]] ===> true,
+
+ Person.job = "학생";
+ Person.age //  [[writable]] ===> true,
+
+ // 반복을 통해서 요소들을 출력할 수있다.
+ Person.age //  [[enumarable]] ===> true,
+
+ Person.age = 10000
+ Person.age //  [[configurable]] ===> true,
+
+
+ const [age, setAge] = useState(0)
+
+
+ const who = {} // const 적용시 불안정하다.
+ who = "안녕" // 변경 불가
+
+ who.age = 100; // 막을 방법이 없다.
+
+ 객체 변경     금지... (완벽하게 막을 수 없어서)
+ : 객체를 복사해서 사용
+ : lodash 라이브러리 활용 (https://lodash.com/docs/#cloneDeep)
+
+
+ 객체 만드는 법
+ : 객체 리터럴     {}
+ : 함수로 객체만드는 법 (4가지)
+```
+
+# React useState 정리
+
+```txt
+
+ 모든 hook 들은 컴포넌트 js 의 첫번째 영역에 배치를 하자!
+
+ hook ?
+
+ 일반 변수는 값이 바뀌어도 재렌더링 없음
+ 리액트 변수는 값이 바뀌면 재 렌더링 되므로 화면 반영
+
+
+  1. 리액트용 변수 즉, useState 는 재 렌더링시 표현된다.
+
+  2. 리액트용 변수 즉, useState 는 컴포넌트에서만 작성할 수 있습니다.
+
+  3. useState 는 비동기이므로 즉시 참조할 수 가 없다.
+
+  4. useState 에 직접 값을 변경할 수 없다.
+     const [age, setAge] = useState(0);
+     age = 100; (X)
+
+  5. useState 에서 현재값을 참조하고
+     즉시 갱신을 하려면 함수를 활용하여 업데이트 한다.
+
+     const [age, setAge] = useState(0);
+     setAge(age++); // 1 이 되지 않는다. 즉, 즉시 갱신 되지 않는다.
+     console.log(age);
+     // 우리는 1증가한 값을 기대하였다. 하지만 값은 옛날거 유지
+     // 함수가 종료되면 그때 업데이트 된다.
+
+
+       const [isOpen, setIsOpen] = useState(false);
+
+       const clickMbbt = () => {
+
+         const now = !isOpen;
+         setIsOpen(now);
+
+         //     즉시 갱신을 하려면 함수를 활용하여 업데이트 한다.
+
+         // setIsOpen((prev) => {
+         //   return !prev;
+         // });
+
+       };
+
+
+   6. useState 에서 기존 값 참조 후
+      직접 값 갱신 리턴 받아서 바로 사용하고 싶다.
+
+     const [age, setAge] = useState(0);
+     setAge(age++) ; // 기존 방식 (새로운 값 안나옴)
+
+     setAge( 이전값 => { return 새로운값 }  ) // 함수 방식(새로운 값 나옴)
+     setAge( prev => { return prev+1 }  ) // 함수 방식(새로운 값 나옴)
 ```
