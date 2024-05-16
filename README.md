@@ -868,3 +868,83 @@ MS, Apple, Google, ... 개발자
   http://localhost:3000/docs/search
   ?cate=singer&lang=ko&name=%EC%95%84%EC%9D%B4%EC%9C%A0
 ```
+
+# JS 22장
+
+```txt
+22장 this ?     342 페이지
+
+ 1. 객체 는 상태( property, methode )를 가지고 있다.
+
+ 2. 객체 는 독특한 데이터 종류이다.
+
+ - 메소드는
+    자기가 코딩된 객체(실행이 되는 순간 인스턴스)의 property 를 변경할 수 있다.
+
+ - 속성을 변경려면 메소드는  자기가 속한 객체(this로 찾을 수 있다.)를 알수가 있어야 한다.
+
+ 3. this 는 함수 호출 방식에 따라서 그때 그때 결정이 된다.
+
+
+ 3.1. 일반 함수 호출
+
+    function Go() {
+      // this ?
+    }
+    Go(); // window
+
+ 3.2. 메소드 호출 방식
+
+    const obj = {
+      gogo(){
+         this?
+      }
+    }
+
+    obj.gogo(); // obj
+
+ 3.3. 생성자 함수 호출 방식
+
+    function  Go() {
+      // this?
+    }
+
+    const who = new Go();  // who
+
+ 3.4. 간접 적으로 접근해서 호출 (X)
+   Function.prototye.call();
+   Function.prototye.apply();
+   Function.prototye.bind();
+
+ 4. 주의 하자. ( setTimeOut / setInterval )
+  : setTimeout  (시간이 지나면 함수 호출 )
+  : setInterval (일정한 시간마다 지나면 함수 호출 )
+
+  var value = 1;
+
+  const obj = {
+      value: 100;
+      foo () {
+         console.log(this) //     obj
+         const gogo = this;
+
+         // setTimeout(기능, 시간)
+         setTimeout( function () {
+                        console.log(this) // 일반함수라서 window
+                        gogo.value;
+                     },  1000)
+      }
+  }
+
+ // 메소드로 호출했다.
+ // 지금까지의 얘기로는 this 는 obj 를 가르킨다고 알고 있었다. 그런데..
+  obj.foo();   // obj,  window
+
+ - this는 코딩된 위치를 기준으로 바인딩(연결) 한다.
+
+
+ 5. 결론
+
+ - 일반함수 호출은 this가 window 를 대상으로 한다.
+ - 객체를 가르키고 싶다면(참조한다면) 화살표 함수 쓰세요.
+```
